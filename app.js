@@ -96,15 +96,12 @@ var sendStructuredMessage = (recipientId) => {
             attachment: {
                 type: "template",
                 payload: {
-                    template_type: "generic",
-                    elements: [{
-                        title: "Patrick",
-                        subtitle: "is fat",
-                        buttons: [{
-                            type: "postback",
-                            title: "Nice!",
-                            payload: ""
-                        }]
+                    template_type: "button",
+                    text: "What do you want to do",
+                    buttons: [{
+                        type: "postback",
+                        title: "Give gold star",
+                        payload: "GIVE"
                     }]
                 }
             }
