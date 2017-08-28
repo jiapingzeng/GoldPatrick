@@ -117,8 +117,8 @@ var sendTextMessage = (recipientId, messageText) => {
         "recipient": { "id": recipientId },
         "message": { "text": messageText }
     }
-    console.log(messageData)
-    //callSendAPI(messageData)
+    //console.log(messageData)
+    callSendAPI(messageData)
 }
 
 var callSendAPI = (messageData) => {
