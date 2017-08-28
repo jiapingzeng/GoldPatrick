@@ -77,7 +77,7 @@ var receivedMessage = (event) => {
         console.log('received message "' + messageText + '" from ' + senderId)
         switch (messageText) {
             case 'FAT':
-                sendMessage(senderId)
+                snedStructuredMessage(senderId)
                 break
             default:
                 sendTextMessage(senderId, sendTextMessage(senderId, messageText))
