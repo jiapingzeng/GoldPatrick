@@ -46,6 +46,7 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', (req, res) => {
     var data = req.body
+    console.log(data)
     if (data.object === 'page') {
         data.entry.forEach((entry) => {
             var pageId = entry.id
