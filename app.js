@@ -73,6 +73,7 @@ var receivedMessage = (event) => {
     var messageAttachments = message.attachments
 
     if (messageText) {
+        console.log('received message "' + messageText + '" from ' + senderId)
         switch (messageText) {
             case 'FAT':
                 sendMessage(senderId)
@@ -115,8 +116,8 @@ var sendTextMessage = (recipientId, messageText) => {
         "recipient": { "id": recipientId },
         "message": { "text": messageText }
     }
-    //console.log(messageData)
-    callSendAPI(messageData)
+    console.log(messageData)
+    //callSendAPI(messageData)
 }
 
 var callSendAPI = (messageData) => {
