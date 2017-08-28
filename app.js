@@ -3,6 +3,15 @@ var config = require('config')
 var bodyParser = require('body-parser')
 var request = require('request')
 
+const log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'})
+const log_stdout = process.stdout
+
+console.log = function(d) {
+  var date = new Date(Date.now());
+  log_file.write(date.toTimeString() + ": " + util.format(d) + '\n---\n')
+  log_stdout.write(util.format(d) + '\n')
+}
+
 var app = express()
 var port = process.env.PORT || 3000
 
@@ -17,6 +26,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 console.log('server started')
+
+app.get('/debug', function (req, res) {
+    res.sendFile(path.join(__dirname, '/debug.log'));
+})
 
 app.get('/webhook', (req, res) => {
     if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === validationToken) {
