@@ -2,6 +2,9 @@ var express = require('express')
 var config = require('config')
 var bodyParser = require('body-parser')
 var request = require('request')
+var path = require('path')
+var fs = require('fs')
+var util = require('util')
 
 const log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'})
 const log_stdout = process.stdout
