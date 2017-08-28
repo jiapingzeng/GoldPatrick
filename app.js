@@ -99,7 +99,8 @@ var sendTextMessage = (recipientId, messageText) => {
         "recipient": { "id": recipientId },
         "message": { "text": messageText }
     }
-    callSendAPI(messageData)
+    console.log(messageData)
+    //callSendAPI(messageData)
 }
 
 var callSendAPI = (messageData) => {
@@ -114,7 +115,8 @@ var callSendAPI = (messageData) => {
             var messageId = body.message_id
             console.log('works')
         } else {
-            console('doesn\'t work')
+            console.log('doesn\'t work')
+            console.log(err)
         }
     })
 }
