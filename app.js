@@ -77,7 +77,7 @@ var receivedMessage = (event) => {
         console.log('received message "' + messageText + '" from ' + senderId)
         switch (messageText) {
             case 'FAT':
-                snedStructuredMessage(senderId)
+                sendStructuredMessage(senderId)
                 break
             default:
                 sendTextMessage(senderId, sendTextMessage(senderId, messageText))
@@ -107,6 +107,7 @@ var sendStructuredMessage = (recipientId) => {
             }
         }
     }
+    callSendAPI(messageData)
 }
 
 var sendTextMessage = (recipientId, messageText) => {
