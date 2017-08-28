@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 console.log('server started')
 
 app.get('/webhook', (req, res) => {
-    if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] == verifyToken) {
+    if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] == validationToken) {
         res.status(200).send(req.query['hub.challenge'])
     } else {
         res.send(403).send()
