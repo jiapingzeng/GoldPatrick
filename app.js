@@ -25,13 +25,20 @@ var serverUrl = (process.env.SERVER_URL) ? (process.env.SERVER_URL) : config.get
 
 app.listen(port)
 
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 console.log('server started')
 
-app.get('/debug', function (req, res) {
+app.get('/', (req, res) => {
+    res.render('index')
+})
+
+app.get('/debug', (req, res) => {
     res.sendFile(path.join(__dirname, '/debug.log'));
 })
 
