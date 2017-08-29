@@ -120,7 +120,7 @@ var sendGenericMessage = (recipientId) => {
                         }, {
                             type: "web_url",
                             title: "Patrick",
-                            url: "https://goldpatrick.herokuapps.com",
+                            url: "https://goldpatrick.herokuapp.com",
                             webview_height_ratio: 'tall'
                         }]
                     }]
