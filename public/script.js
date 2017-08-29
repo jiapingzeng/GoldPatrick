@@ -1,7 +1,20 @@
-$('#share').on('click', function () {
-    MessengerExtensions.beginShareFlow(function success(response) {
+$(function () {
+    $('#title').text('not clicked')
+})
+
+$('#invite').on('click', function () {
+    $('#title').text('clicked')
+    MessengerExtensions.beginShareFlow(function (response) {
         console.log('success')
-    }, function error(errorCode, errorMessage) {
+        $('#text').text('shared')
+        if (response.is_sent) {
+            MessengerExtensions.requestCloseBrowser(function () {
+                console.log('closed')
+            }, function error(err) {
+                console.log('error')
+            });
+        }
+    }, function (errorCode, errorMessage) {
         console.log(errorMessage)
     }, {
             attachment: {
