@@ -6,13 +6,13 @@ var path = require('path')
 var fs = require('fs')
 var util = require('util')
 
-const log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'})
+const log_file = fs.createWriteStream(__dirname + '/debug.log', { flags: 'w' })
 const log_stdout = process.stdout
 
-console.log = function(d) {
-  var date = new Date(Date.now());
-  log_file.write(date.toTimeString() + ": " + util.format(d) + '\n---\n')
-  log_stdout.write(util.format(d) + '\n')
+console.log = function (d) {
+    var date = new Date(Date.now());
+    log_file.write(date.toTimeString() + ": " + util.format(d) + '\n---\n')
+    log_stdout.write(util.format(d) + '\n')
 }
 
 var app = express()
@@ -77,17 +77,17 @@ var receivedMessage = (event) => {
         console.log('received message "' + messageText + '" from ' + senderId)
         switch (messageText) {
             case 'FAT':
-                sendStructuredMessage(senderId)
+                sendGenericMessage(senderId)
                 break
             default:
                 sendTextMessage(senderId, sendTextMessage(senderId, messageText))
-        }        
+        }
     } else if (messageAttachments) {
         sendTextMessage(senderId, 'No, this is Patrick')
     }
 }
 
-var sendStructuredMessage = (recipientId) => {
+var sendGenericMessage = (recipientId) => {
     var messageData = {
         recipient: {
             id: recipientId
@@ -96,17 +96,31 @@ var sendStructuredMessage = (recipientId) => {
             attachment: {
                 type: "template",
                 payload: {
-                    template_type: "button",
-                    text: "What do you want to do",
-                    buttons: [{
-                        type: "postback",
-                        title: "Give gold star",
-                        payload: "GIVE"
-                    }]
+                    template_type: "generic",
+                    elements: [
+                        {
+                            title: "This is Patrick",
+                            image_url: "http://i.imgur.com/A7cvPDl.png",
+                            subtitle: "I'm also gold"
+                        },
+                        buttons: [{
+                            type: "postback",
+                            title: "Ask for Gold Star",
+                            payload: "REQUEST"
+                        }, {
+                            type: "postback",
+                            title: "Check Gold Star balance",
+                            payload: "BALANCE"
+                        }]
+                    ]
                 }
             }
         }
     }
+    callSendAPI(messageData)
+}
+
+var sendMessage = (recipientId, messageData) => {
     callSendAPI(messageData)
 }
 
