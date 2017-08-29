@@ -8,7 +8,7 @@ $(function () {
         appendLog(result)
     }, function (result) {
         appendLog(result)
-    }
+    })
 })
 
 $('#getStarted').on('click', function () {
