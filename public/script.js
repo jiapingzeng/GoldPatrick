@@ -53,6 +53,10 @@ $('#invite').on('click', function () {
                             type: "web_url",
                             url: "https://goldpatrick.herokuapp.com",
                             title: "Oi"
+                        }, {
+                            type: "postback",
+                            title: "K",
+                            payload: "REQUEST"
                         }]
                     }]
                 }

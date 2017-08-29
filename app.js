@@ -88,7 +88,7 @@ var receivedMessage = (event) => {
                 sendGenericMessage(senderId)
                 break
             default:
-                sendTextMessage(senderId, sendTextMessage(senderId, messageText))
+                sendTextMessage(senderId, sendTextMessage(senderId, 'I can\'t understand anything (yet)'))
         }
     } else if (messageAttachments) {
         sendTextMessage(senderId, 'No, this is Patrick')
