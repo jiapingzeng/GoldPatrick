@@ -54,7 +54,6 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', (req, res) => {
     var data = req.body
-    console.log(data)
     if (data.object === 'page') {
         data.entry.forEach((entry) => {
             var pageId = entry.id
@@ -77,6 +76,7 @@ app.post('/webhook', (req, res) => {
 var receivedPayload = (event) => {
     var senderId = event.sender.id
     var payload = event.postback.payload
+    console.log(payload)
     switch (payload) {
         case 'REQUEST':
             sendTextMessage(senderId, "Roses are blue, violets are red, I have to go to the bathroom")
