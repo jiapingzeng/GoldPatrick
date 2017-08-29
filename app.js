@@ -97,12 +97,10 @@ var sendGenericMessage = (recipientId) => {
                 type: "template",
                 payload: {
                     template_type: "generic",
-                    elements: [
-                        {
-                            title: "This is Patrick",
-                            image_url: "http://i.imgur.com/A7cvPDl.png",
-                            subtitle: "I'm also gold"
-                        },
+                    elements: [{
+                        title: "This is Patrick",
+                        image_url: "http://i.imgur.com/A7cvPDl.png",
+                        subtitle: "I'm also gold",
                         buttons: [{
                             type: "postback",
                             title: "Ask for Gold Star",
@@ -112,7 +110,7 @@ var sendGenericMessage = (recipientId) => {
                             title: "Check Gold Star balance",
                             payload: "BALANCE"
                         }]
-                    ]
+                    }]
                 }
             }
         }
