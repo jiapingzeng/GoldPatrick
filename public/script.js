@@ -37,5 +37,5 @@ $('#invite').on('click', function () {
                     }]
                 }
             }
-        }, "broadcast")
+        }, "current_thread")
 })
