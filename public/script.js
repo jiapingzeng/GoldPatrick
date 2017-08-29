@@ -1,12 +1,16 @@
 $(function () {
     $('#title').text('not clicked')
+    MessengerExtensions.getContext('1668896723154558', function (result) {
+        $('#text').text(result)
+    }, function (result) {
+        console.log('error')
+    }
 })
 
 $('#invite').on('click', function () {
     $('#title').text('clicked')
     MessengerExtensions.beginShareFlow(function (response) {
         console.log('success')
-        $('#text').text('shared')
         if (response.is_sent) {
             MessengerExtensions.requestCloseBrowser(function () {
                 console.log('closed')
