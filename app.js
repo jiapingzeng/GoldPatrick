@@ -62,6 +62,8 @@ app.post('/webhook', (req, res) => {
             entry.messaging.forEach((event) => {
                 if (event.message) {
                     receivedMessage(event)
+                } else if (event.postback && event.postback.payload) {
+                    receivedPayload(event)
                 } else {
                     console.log(event)
                 }
@@ -70,6 +72,20 @@ app.post('/webhook', (req, res) => {
         res.sendStatus(200)
     }
 })
+
+
+var receivedPayload = (event) => {
+    var senderId = event.sender.id
+    var payload = event.postback.payload
+    switch (payload) {
+        case 'REQUEST':
+            sendTextMessage(senderId, "Roses are blue, violets are red, I have to go to the bathroom")
+            break
+        case 'BALANCE':
+            sendTextMessage(senderId, "Uh...")
+            break
+    }
+}
 
 var receivedMessage = (event) => {
     var senderId = event.sender.id
@@ -112,17 +128,11 @@ var sendGenericMessage = (recipientId) => {
                         buttons: [{
                             type: "postback",
                             title: "Give me a Gold Star",
-                            payload: {
-                                recipient: { id: recipientId },
-                                message: { text: "Roses are blue, violets are red, I have to go to the bathroom" }
-                            }
+                            payload: "REQUEST"
                         }, {
                             type: "postback",
                             title: "How many do I have",
-                            payload: {
-                                recipient: { id: recipientId },
-                                message: { text: "Uh..." }
-                            }
+                            payload: "BALANCE"
                         }, {
                             type: "web_url",
                             title: "Summon Patrick",
