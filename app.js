@@ -102,7 +102,7 @@ var receivedPayload = (event) => {
     console.log("received payload: " + payload)
     switch (payload) {
         case 'REQUEST':
-            sendTextMessage(senderId, "Roses are blue, violets are red, I have to go to the bathroom")
+            sendTextMessage(senderId, "Roses are blue, violets are red, I have to go to the bathroom.")
             break
         case 'BALANCE':
             sendTextMessage(senderId, "Uh...")
@@ -126,7 +126,7 @@ var sendGenericMessage = (recipientId) => {
                         subtitle: "And I'm gold. I give gold stars sometimes and I can check how many you have.",
                         buttons: [{
                             type: "postback",
-                            title: "Give me a Gold Star",
+                            title: "Give me a gold star",
                             payload: "REQUEST"
                         }, {
                             type: "postback",
