@@ -61,7 +61,7 @@ app.post('/webhook', (req, res) => {
             entry.messaging.forEach((event) => {
                 if (event.message) {
                     receivedMessage(event)
-                } else if (event.postback && event.postback.payload) {
+                } else if (event.postback) {
                     receivedPayload(event)
                 } else {
                     console.log(event)
@@ -71,21 +71,6 @@ app.post('/webhook', (req, res) => {
         res.sendStatus(200)
     }
 })
-
-
-var receivedPayload = (event) => {
-    var senderId = event.sender.id
-    var payload = event.postback.payload
-    console.log(payload)
-    switch (payload) {
-        case 'REQUEST':
-            sendTextMessage(senderId, "Roses are blue, violets are red, I have to go to the bathroom")
-            break
-        case 'BALANCE':
-            sendTextMessage(senderId, "Uh...")
-            break
-    }
-}
 
 var receivedMessage = (event) => {
     var senderId = event.sender.id
@@ -104,10 +89,24 @@ var receivedMessage = (event) => {
                 sendGenericMessage(senderId)
                 break
             default:
-                sendTextMessage(senderId, sendTextMessage(senderId, 'I can\'t understand anything (yet)'))
+                sendTextMessage(senderId, sendTextMessage(senderId, 'I can\'t understand anything (yet). Yell "PATRICK" for options.'))
         }
     } else if (messageAttachments) {
         sendTextMessage(senderId, 'No, this is Patrick')
+    }
+}
+
+var receivedPayload = (event) => {
+    var senderId = event.sender.id
+    var payload = event.postback.payload
+    console.log("received payload: " + payload)
+    switch (payload) {
+        case 'REQUEST':
+            sendTextMessage(senderId, "Roses are blue, violets are red, I have to go to the bathroom")
+            break
+        case 'BALANCE':
+            sendTextMessage(senderId, "Uh...")
+            break
     }
 }
 
