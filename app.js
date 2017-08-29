@@ -25,6 +25,7 @@ var serverUrl = (process.env.SERVER_URL) ? (process.env.SERVER_URL) : config.get
 
 app.listen(port)
 
+app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -100,7 +101,7 @@ var sendGenericMessage = (recipientId) => {
                     elements: [{
                         title: "This is Patrick",
                         image_url: "http://i.imgur.com/A7cvPDl.png",
-                        subtitle: "I'm also gold. I give gold stars sometimes and I can check how many you have.",
+                        subtitle: "And I'm gold. I give gold stars sometimes and I can check how many you have.",
                         buttons: [{
                             type: "postback",
                             title: "Give me a Gold Star",
