@@ -1,5 +1,5 @@
 function appendLog(e) {
-    $('#log').append('<li>' + e + '</li>')
+    $('#log').append('<li>' + JSON.stringify(e) + '</li>')
 }
 
 $(function () {
