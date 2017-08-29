@@ -100,14 +100,14 @@ var sendGenericMessage = (recipientId) => {
                     elements: [{
                         title: "This is Patrick",
                         image_url: "http://i.imgur.com/A7cvPDl.png",
-                        subtitle: "I'm also gold",
+                        subtitle: "I'm also gold. I give gold stars sometimes and I can check how many you currently have.",
                         buttons: [{
                             type: "postback",
-                            title: "Ask for Gold Star",
+                            title: "Give me a Gold Star",
                             payload: "REQUEST"
                         }, {
                             type: "postback",
-                            title: "Check Gold Star balance",
+                            title: "How many do I have",
                             payload: "BALANCE"
                         }]
                     }]
