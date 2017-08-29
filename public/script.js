@@ -1,25 +1,41 @@
+function appendLog(e) {
+    $('#log').append('<li>' + e + '</li>')
+}
+
 $(function () {
     $('#title').text('not clicked')
     MessengerExtensions.getContext('1668896723154558', function (result) {
-        $('#text').text(result)
+        appendLog(result)
     }, function (result) {
-        $('#text').text(result)
+        appendLog(result)
     }
+})
+
+$('#getStarted').on('click', function () {
+    MessengerExtensions.askPermission(function (response) {
+        var permissions = response.permissions
+        var isGranted = response.isGranted
+        if (isGranted) {
+            appendLog('permission granted')
+        }
+    }, function (errorCode, errorMessage) {
+        appendLog(errorMessage)
+    })
 })
 
 $('#invite').on('click', function () {
     $('#title').text('clicked')
     MessengerExtensions.beginShareFlow(function (response) {
-        console.log('success')
+        appendLog('sharing')
         if (response.is_sent) {
             MessengerExtensions.requestCloseBrowser(function () {
-                console.log('closed')
+                appendLog('closing webview')
             }, function error(err) {
-                console.log('error')
+                appendLog('error closing webview')
             });
         }
     }, function (errorCode, errorMessage) {
-        console.log(errorMessage)
+        appendLog(errorMessage)
     }, {
             attachment: {
                 type: "template",
