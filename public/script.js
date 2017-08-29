@@ -44,7 +44,7 @@ $('#invite').on('click', function () {
                 payload: {
                     template_type: "generic",
                     elements: [{
-                        title: "I just earned a gold star!",
+                        title: "Patrick just gave you a gold star!",
                         image_url: "https://i.imgur.com/A7cvPDl.png",
                         subtitle: "Nice!",
                         default_action: {
