@@ -117,6 +117,11 @@ var sendGenericMessage = (recipientId) => {
                             type: "postback",
                             title: "How many do I have",
                             payload: "BALANCE"
+                        }, {
+                            type: "web_url",
+                            title: "Patrick",
+                            url: "https://goldpatrick.herokuapps.com",
+                            webview_height_ratio: tall
                         }]
                     }]
                 }
