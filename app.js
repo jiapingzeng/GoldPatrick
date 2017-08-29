@@ -84,7 +84,7 @@ var receivedMessage = (event) => {
     if (messageText) {
         console.log('received message "' + messageText + '" from ' + senderId)
         switch (messageText) {
-            case 'FAT':
+            case '':
                 sendGenericMessage(senderId)
                 break
             default:
@@ -112,11 +112,17 @@ var sendGenericMessage = (recipientId) => {
                         buttons: [{
                             type: "postback",
                             title: "Give me a Gold Star",
-                            payload: "REQUEST"
+                            payload: {
+                                recipient: { id: recipientId },
+                                message: { text: "Roses are blue, violets are red, I have to go to the bathroom" }
+                            }
                         }, {
                             type: "postback",
                             title: "How many do I have",
-                            payload: "BALANCE"
+                            payload: {
+                                recipient: { id: recipientId },
+                                message: { text: "Uh..." }
+                            }
                         }, {
                             type: "web_url",
                             title: "Summon Patrick",
@@ -133,8 +139,8 @@ var sendGenericMessage = (recipientId) => {
 
 var sendTextMessage = (recipientId, messageText) => {
     var messageData = {
-        "recipient": { "id": recipientId },
-        "message": { "text": messageText }
+        recipient: { id: recipientId },
+        message: { text: messageText }
     }
     //console.log(messageData)
     callSendAPI(messageData)
