@@ -3,7 +3,7 @@ $(function () {
     MessengerExtensions.getContext('1668896723154558', function (result) {
         $('#text').text(result)
     }, function (result) {
-        console.log('error')
+        $('#text').text(result)
     }
 })
 
