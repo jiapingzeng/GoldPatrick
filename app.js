@@ -107,7 +107,7 @@ var sendGenericMessage = (recipientId) => {
                     template_type: "generic",
                     elements: [{
                         title: "This is Patrick",
-                        image_url: "http://i.imgur.com/A7cvPDl.png",
+                        image_url: "https://i.imgur.com/A7cvPDl.png",
                         subtitle: "And I'm gold. I give gold stars sometimes and I can check how many you have.",
                         buttons: [{
                             type: "postback",
@@ -119,7 +119,7 @@ var sendGenericMessage = (recipientId) => {
                             payload: "BALANCE"
                         }, {
                             type: "web_url",
-                            title: "Patrick",
+                            title: "Summon Patrick",
                             url: "https://goldpatrick.herokuapp.com",
                             webview_height_ratio: 'tall'
                         }]
@@ -128,10 +128,6 @@ var sendGenericMessage = (recipientId) => {
             }
         }
     }
-    callSendAPI(messageData)
-}
-
-var sendMessage = (recipientId, messageData) => {
     callSendAPI(messageData)
 }
 
