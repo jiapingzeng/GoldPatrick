@@ -14,31 +14,8 @@ html
             js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
             fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'Messenger'));
-            MessengerExtensions.beginShareFlow(function success(response) {
-
-            }, function error(errorCode, errorMessage) {
-
-            }, {
-                attachment: {
-                    type: "template",
-                    payload: {
-                        template_type: "generic",
-                        elements: [{
-                            title: "I just earned a gold star!",
-                            image_url: "https://i.imgur.com/A7cvPDl.png",
-                            subtitle: "Nice!",
-                            default_action: {
-                                type: "web_url",
-                                url: "https://goldpatrick.herokuapp.com"
-                            },
-                            buttons: [{
-                                type: "web_url",
-                                url: "https://goldpatrick.herokuapp.com",
-                                title: "Oi"
-                            }]
-                        }]
-                    }
-                }
-            }, "broadcast");            
         h1 Title
         p text
+        button#invite Share
+        script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
+        script(src='/script.js')
