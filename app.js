@@ -84,7 +84,7 @@ var receivedMessage = (event) => {
     if (messageText) {
         console.log('received message "' + messageText + '" from ' + senderId)
         switch (messageText) {
-            case '':
+            case 'PATRICK':
                 sendGenericMessage(senderId)
                 break
             default:
