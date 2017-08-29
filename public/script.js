@@ -2,6 +2,7 @@ function appendLog(e) {
     $('#log').append('<li>' + JSON.stringify(e) + '</li>')
 }
 
+/*
 $(function () {
     $('#title').text('not clicked')
     MessengerExtensions.getContext('1668896723154558', function (result) {
@@ -22,6 +23,7 @@ $('#getStarted').on('click', function () {
         appendLog(errorMessage)
     })
 })
+*/
 
 $('#invite').on('click', function () {
     $('#title').text('clicked')
