@@ -24,8 +24,7 @@ $(function () {
         console.log('io connected')
     })
 
-    $('#invite').on('click', function () {
-        $('#title').text('clicked')
+    $('#send').on('click', function () {
         MessengerExtensions.beginShareFlow(function (response) {
             if (response.is_sent) {
                 MessengerExtensions.requestCloseBrowser(function () {
