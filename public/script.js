@@ -5,7 +5,9 @@ $(function () {
     
     MessengerExtensions.getUserID(function (uids) {
         userId = uids.psid
-    }, null)
+    }, function (error, errorMessage) {
+        appendLog(errorMessage)
+    })
 
     $.ajax({
         url: 'https://graph.facebook.com/v2.10/' + userId + '?fields=first_name&access_token=' + accessToken,
@@ -15,7 +17,11 @@ $(function () {
             access_token: accessToken
         },
         success: function (data) {
-            firstName = data.first_name
+            appendLog(data)
+            if (data.first_name) {
+                firstName = data.first_name
+                appendLog(firstName)
+            }            
         }
     })        
 
