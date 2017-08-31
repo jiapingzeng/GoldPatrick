@@ -23,6 +23,9 @@ $(function () {
                 firstName = data.first_name
                 appendLog(firstName)
             }            
+        },
+        error: function (data) {
+            appendLog(data)
         }
     })        
 
