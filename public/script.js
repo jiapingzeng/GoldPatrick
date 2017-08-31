@@ -1,6 +1,46 @@
 function appendLog(e) {
+    console.log(e)
     $('#log').append('<li>' + JSON.stringify(e) + '</li>')
 }
+
+$('#invite').on('click', function () {
+    $('#title').text('clicked')
+    MessengerExtensions.beginShareFlow(function (response) {
+        if (response.is_sent) {
+            MessengerExtensions.requestCloseBrowser(function () {
+                appendLog('closing webview')
+            }, null);
+        }
+    }, null, {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "generic",
+                    elements: [{
+                        title: "Patrick just gave you a gold star!",
+                        image_url: "https://i.imgur.com/hfBm4JE.png",
+                        subtitle: "Nice!",
+                        default_action: {
+                            type: "web_url",
+                            url: "https://goldpatrick.herokuapp.com"
+                        },
+                        buttons: [{
+                            type: "web_url",
+                            url: "https://goldpatrick.herokuapp.com",
+                            title: "Oi"
+                        }]
+                    }]
+                }
+            }
+        }, "current_thread")
+})
+
+$(function () {
+    var socket = io()
+    socket.on('connected', function (data) {
+        console.log('io connected')
+    })
+})
 
 /*
 $(function () {
@@ -24,40 +64,3 @@ $('#getStarted').on('click', function () {
     })
 })
 */
-
-$('#invite').on('click', function () {
-    $('#title').text('clicked')
-    MessengerExtensions.beginShareFlow(function (response) {
-        appendLog('sharing')
-        if (response.is_sent) {
-            MessengerExtensions.requestCloseBrowser(function () {
-                appendLog('closing webview')
-            }, function error(err) {
-                appendLog('error closing webview')
-            });
-        }
-    }, function (errorCode, errorMessage) {
-        appendLog(errorMessage)
-    }, {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    elements: [{
-                        title: "Patrick just gave you a gold star!",
-                        image_url: "https://i.imgur.com/A7cvPDl.png",
-                        subtitle: "Nice!",
-                        default_action: {
-                            type: "web_url",
-                            url: "https://goldpatrick.herokuapp.com"
-                        },
-                        buttons: [{
-                            type: "web_url",
-                            url: "https://goldpatrick.herokuapp.com",
-                            title: "Oi"
-                        }]
-                    }]
-                }
-            }
-        }, "current_thread")
-})

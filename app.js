@@ -1,10 +1,24 @@
 var express = require('express')
+var app = express()
+var server = require('http').Server(app)
+var io = require('socket.io')(server)
 var config = require('config')
 var bodyParser = require('body-parser')
 var request = require('request')
+var socketio = require('socket.io')
 var path = require('path')
 var fs = require('fs')
 var util = require('util')
+
+var port = process.env.PORT || 3000
+server.listen(port)
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 const log_file = fs.createWriteStream(__dirname + '/debug.log', { flags: 'w' })
 const log_stdout = process.stdout
@@ -15,24 +29,12 @@ console.log = function (d) {
     log_stdout.write(util.format(d) + '\n')
 }
 
-var app = express()
-var port = process.env.PORT || 3000
+console.log('server started')
 
 var appSecret = (process.env.MESSENGER_APP_SECRET) ? process.env.MESSENGER_APP_SECRET : config.get('appSecret')
 var validationToken = (process.env.MESSENGER_VALIDATION_TOKEN) ? (process.env.MESSENGER_VALIDATION_TOKEN) : config.get('validationToken')
 var pageAccessToken = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ? (process.env.MESSENGER_PAGE_ACCESS_TOKEN) : config.get('pageAccessToken')
 var serverUrl = (process.env.SERVER_URL) ? (process.env.SERVER_URL) : config.get('serverUrl')
-
-app.listen(port)
-
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, 'public')))
-
-console.log('server started')
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -70,6 +72,10 @@ app.post('/webhook', (req, res) => {
         })
         res.sendStatus(200)
     }
+})
+
+io.on('connection', function (socket) {
+    socket.emit('connected')
 })
 
 var receivedMessage = (event) => {
@@ -122,7 +128,7 @@ var sendGenericMessage = (recipientId) => {
                     template_type: "generic",
                     elements: [{
                         title: "This is Patrick",
-                        image_url: "https://i.imgur.com/A7cvPDl.png",
+                        image_url: "https://i.imgur.com/eufVyzu.png",
                         subtitle: "And I'm gold. I give gold stars sometimes and I can check how many you have.",
                         buttons: [{
                             type: "postback",
@@ -151,7 +157,6 @@ var sendTextMessage = (recipientId, messageText) => {
         recipient: { id: recipientId },
         message: { text: messageText }
     }
-    //console.log(messageData)
     callSendAPI(messageData)
 }
 

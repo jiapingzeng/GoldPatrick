@@ -1,7 +1,7 @@
 {
   "name": "gold-patrick",
   "private": true,
-  "version": "0.3.1",
+  "version": "0.4.3",
   "description": "GoldPatrick",
   "main": "app.js",
   "author": {
@@ -15,6 +15,7 @@
     "config": "^1.26.2",
     "express": "^4.15.4",
     "pug": "^2.0.0-rc.3",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "socket.io": "^2.0.3"
   }
 }
