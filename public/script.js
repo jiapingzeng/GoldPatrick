@@ -2,7 +2,7 @@ $(function () {
     var userId
     var firstName
     var accessToken = 'EAAXt2kxZAtn4BAJNMj8BC6FmZBlJvHY1SaQ1k6zZAX0R547OfhZCHbtFkBJoWesiyTC1nowC8FcZCbWob3CQTUaXF3I9oETlFbDEPKPLDsFAaMLIJxim69ZCZCZBzE1AUCwuEvE0VsIw6RLSM8qM9HZBmQXYcikZBlHdGW66Lyye5LpQZDZD'
-    
+
     MessengerExtensions.getUserID(function (uids) {
         userId = '' + uids.psid
         appendLog(userId)
@@ -31,8 +31,10 @@ $(function () {
                 }
             })
         }
-    })
-    
+    }, function (errorCode, errorMessage) {
+        appendLog(errorMessage)
+    }, "user_profile")
+
 
     /*
     var socket = io()
