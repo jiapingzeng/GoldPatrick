@@ -25,10 +25,12 @@ $(function () {
         }
     })        
 
+    /*
     var socket = io()
     socket.on('connected', function (data) {
         console.log('io connected')
     })
+    */
 
     $('#send').on('click', function () {
         MessengerExtensions.beginShareFlow(function (response) {
