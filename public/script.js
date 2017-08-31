@@ -5,6 +5,7 @@ $(function () {
     
     MessengerExtensions.getUserID(function (uids) {
         userId = uids.psid
+        appendLog(userId)
     }, function (error, errorMessage) {
         appendLog(errorMessage)
     })
