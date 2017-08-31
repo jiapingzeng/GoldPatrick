@@ -68,7 +68,8 @@ $(function () {
                             buttons: [{
                                 type: "web_url",
                                 url: "https://goldpatrick.herokuapp.com",
-                                title: "Oi"
+                                title: "Oi",
+                                webview_height_ratio: 'tall'
                             }]
                         }]
                     }
