@@ -10,24 +10,29 @@ $(function () {
         appendLog(errorMessage)
     })
 
-    $.ajax({
-        url: 'https://graph.facebook.com/v2.10/' + userId,
-        type: 'GET',
-        data: {
-            fields: 'first_name',
-            access_token: accessToken
-        },
-        success: function (data) {
-            appendLog(data)
-            if (data.first_name) {
-                firstName = data.first_name
-                appendLog(firstName)
-            }            
-        },
-        error: function (data) {
-            appendLog(data)
+    MessengerExtensions.askPermission(function (response) {
+        if (response.isGranted) {
+            $.ajax({
+                url: 'https://graph.facebook.com/v2.10/' + userId,
+                type: 'GET',
+                data: {
+                    fields: 'first_name',
+                    access_token: accessToken
+                },
+                success: function (data) {
+                    appendLog(data)
+                    if (data.first_name) {
+                        firstName = data.first_name
+                        appendLog(firstName)
+                    }
+                },
+                error: function (data) {
+                    appendLog(data)
+                }
+            })
         }
-    })        
+    })
+    
 
     /*
     var socket = io()
