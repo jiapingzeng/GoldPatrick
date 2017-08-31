@@ -59,7 +59,7 @@ $(function () {
                         template_type: "generic",
                         elements: [{
                             title: (firstName ? firstName : "Patrick") + " just gave you a gold star!",
-                            image_url: "https://i.imgur.com/hfBm4JE.png",
+                            image_url: "https://i.imgur.com/KKNmpp0.png",
                             subtitle: "Nice!",
                             default_action: {
                                 type: "web_url",
