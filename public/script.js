@@ -11,7 +11,7 @@ $(function () {
     })
 
     $.ajax({
-        url: 'https://graph.facebook.com/v2.10/' + userId + '?fields=first_name&access_token=' + accessToken,
+        url: 'https://graph.facebook.com/v2.10/' + userId,
         type: 'GET',
         data: {
             fields: 'first_name',
