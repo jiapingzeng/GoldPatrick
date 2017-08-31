@@ -40,7 +40,9 @@ $(function () {
                     appendLog('closing webview')
                 }, null);
             }
-        }, null, {
+        }, function (error) {
+            appendLog(error)
+        }, {
                 attachment: {
                     type: "template",
                     payload: {
