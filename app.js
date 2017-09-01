@@ -5,7 +5,7 @@ var io = require('socket.io')(server)
 var config = require('config')
 var bodyParser = require('body-parser')
 var request = require('request')
-var socketio = require('socket.io')
+var mongoose = require('mongoose')
 var path = require('path')
 var fs = require('fs')
 var util = require('util')
@@ -31,10 +31,14 @@ console.log = function (d) {
 
 console.log('server started')
 
-var appSecret = (process.env.MESSENGER_APP_SECRET) ? process.env.MESSENGER_APP_SECRET : config.get('appSecret')
-var validationToken = (process.env.MESSENGER_VALIDATION_TOKEN) ? (process.env.MESSENGER_VALIDATION_TOKEN) : config.get('validationToken')
-var pageAccessToken = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ? (process.env.MESSENGER_PAGE_ACCESS_TOKEN) : config.get('pageAccessToken')
-var serverUrl = (process.env.SERVER_URL) ? (process.env.SERVER_URL) : config.get('serverUrl')
+var appSecret = process.env.MESSENGER_APP_SECRET ? process.env.MESSENGER_APP_SECRET : config.get('appSecret')
+var validationToken = process.env.MESSENGER_VALIDATION_TOKEN ? (process.env.MESSENGER_VALIDATION_TOKEN) : config.get('validationToken')
+var pageAccessToken = process.env.MESSENGER_PAGE_ACCESS_TOKEN ? (process.env.MESSENGER_PAGE_ACCESS_TOKEN) : config.get('pageAccessToken')
+var serverUrl = process.env.MESSENGER_SERVER_URL ? process.env.MESSENGER_SERVER_URL : config.get('serverUrl')
+var connectionString = process.env.MONGODB_URI ? process.env.MONGODB_URI : config.get('connectionString')
+
+//mongoose.connect(connectionString)
+//console.log('database connected')
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -74,9 +78,15 @@ app.post('/webhook', (req, res) => {
     }
 })
 
+/*
 io.on('connection', function (socket) {
     socket.emit('connected')
+
+    socket.on('id obtained', function (data) {
+
+    })
 })
+*/
 
 var receivedMessage = (event) => {
     var senderId = event.sender.id
@@ -113,6 +123,10 @@ var receivedPayload = (event) => {
         case 'BALANCE':
             sendTextMessage(senderId, "Uh...")
             break
+        case 'START':
+            sendTextMessage(senderId, "Welcome! You should now be able to send gold stars to your friends from Extensions.")
+        default:
+            sendGenericMessage(senderId)
     }
 }
 

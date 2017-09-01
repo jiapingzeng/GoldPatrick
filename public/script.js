@@ -1,15 +1,12 @@
-$(function () {
-    var userId
-    var firstName
-    var accessToken = 'EAAXt2kxZAtn4BAJNMj8BC6FmZBlJvHY1SaQ1k6zZAX0R547OfhZCHbtFkBJoWesiyTC1nowC8FcZCbWob3CQTUaXF3I9oETlFbDEPKPLDsFAaMLIJxim69ZCZCZBzE1AUCwuEvE0VsIw6RLSM8qM9HZBmQXYcikZBlHdGW66Lyye5LpQZDZD'
 
-    MessengerExtensions.getUserID(function (uids) {
-        userId = '' + uids.psid
-        appendLog(userId)
-    }, function (error, errorMessage) {
-        appendLog(errorMessage)
-    })
+var userId
+var firstName
+var accessToken = 'EAAXt2kxZAtn4BAJNMj8BC6FmZBlJvHY1SaQ1k6zZAX0R547OfhZCHbtFkBJoWesiyTC1nowC8FcZCbWob3CQTUaXF3I9oETlFbDEPKPLDsFAaMLIJxim69ZCZCZBzE1AUCwuEvE0VsIw6RLSM8qM9HZBmQXYcikZBlHdGW66Lyye5LpQZDZD'
 
+MessengerExtensions.getUserID(function (uids) {
+    userId = '' + uids.psid
+    appendLog(userId)
+    socket.emit("id obtained", { id: userId })
     MessengerExtensions.askPermission(function (response) {
         if (response.isGranted) {
             $.ajax({
@@ -34,54 +31,57 @@ $(function () {
     }, function (errorCode, errorMessage) {
         appendLog(errorMessage)
     }, "user_profile")
-
-
-    /*
-    var socket = io()
-    socket.on('connected', function (data) {
-        console.log('io connected')
-    })
-    */
-
-    $('#send').on('click', function () {
-        MessengerExtensions.beginShareFlow(function (response) {
-            if (response.is_sent) {
-                MessengerExtensions.requestCloseBrowser(function () {
-                    appendLog('closing webview')
-                }, null);
-            }
-        }, function (error) {
-            appendLog(error)
-        }, {
-                attachment: {
-                    type: "template",
-                    payload: {
-                        template_type: "generic",
-                        elements: [{
-                            title: (firstName ? firstName : "Patrick") + " just gave you a gold star!",
-                            image_url: "https://i.imgur.com/KKNmpp0.png",
-                            subtitle: "Nice!",
-                            default_action: {
-                                type: "web_url",
-                                url: "https://goldpatrick.herokuapp.com"
-                            },
-                            buttons: [{
-                                type: "web_url",
-                                url: "https://goldpatrick.herokuapp.com",
-                                title: "Oi",
-                                webview_height_ratio: 'tall'
-                            }]
-                        }]
-                    }
-                }
-            }, "current_thread")
-    })
-
-    function appendLog(e) {
-        console.log(e)
-        $('#log').append('<li>' + JSON.stringify(e) + '</li>')
-    }
+}, function (error, errorMessage) {
+    appendLog(errorMessage)
 })
+
+/*
+var socket = io()
+socket.on('connected', function (data) {
+    console.log('io connected')
+})
+*/
+
+
+$('#send').on('click', function () {
+    MessengerExtensions.beginShareFlow(function (response) {
+        if (response.is_sent) {
+            MessengerExtensions.requestCloseBrowser(function () {
+                appendLog('closing webview')
+            }, null);
+        }
+    }, function (error) {
+        appendLog(error)
+    }, {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "generic",
+                    elements: [{
+                        title: (firstName ? firstName : "Patrick") + " just gave you a gold star!",
+                        image_url: "https://i.imgur.com/KKNmpp0.png",
+                        subtitle: "Nice!",
+                        default_action: {
+                            type: "web_url",
+                            url: "https://goldpatrick.herokuapp.com"
+                        },
+                        buttons: [{
+                            type: "web_url",
+                            url: "https://goldpatrick.herokuapp.com",
+                            title: "Oi",
+                            webview_height_ratio: 'tall'
+                        }]
+                    }]
+                }
+            }
+        }, "current_thread")
+})
+
+function appendLog(e) {
+    console.log(e)
+    $('#log').append('<li>' + JSON.stringify(e) + '</li>')
+}
+
 /*
 $(function () {
     $('#title').text('not clicked')
