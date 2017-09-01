@@ -6,7 +6,7 @@ var accessToken = 'EAAXt2kxZAtn4BAJNMj8BC6FmZBlJvHY1SaQ1k6zZAX0R547OfhZCHbtFkBJo
 MessengerExtensions.getUserID(function (uids) {
     userId = '' + uids.psid
     appendLog(userId)
-    socket.emit("id obtained", { id: userId })
+    //socket.emit("id obtained", { id: userId })
     MessengerExtensions.askPermission(function (response) {
         if (response.isGranted) {
             $.ajax({
