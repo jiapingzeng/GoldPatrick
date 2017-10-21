@@ -3,8 +3,16 @@ var userId
 var firstName
 var accessToken = 'EAAXt2kxZAtn4BAJNMj8BC6FmZBlJvHY1SaQ1k6zZAX0R547OfhZCHbtFkBJoWesiyTC1nowC8FcZCbWob3CQTUaXF3I9oETlFbDEPKPLDsFAaMLIJxim69ZCZCZBzE1AUCwuEvE0VsIw6RLSM8qM9HZBmQXYcikZBlHdGW66Lyye5LpQZDZD'
 
+//$('#log').removeClass('hidden')
+appendLog(window.name)
+
+function appendLog(e) {
+    console.log(e)
+    $('#log').append('<li>' + JSON.stringify(e) + '</li>')
+}
+
 window.extAstncInit = function () {
-    if (window.name == 'messenger_ref' && messenger_extensions) {
+    if (window.name == 'messenger_ref') {
         MessengerExtensions.getUserID(function (uids) {
             userId = '' + uids.psid
             appendLog(userId)
@@ -44,7 +52,7 @@ window.extAstncInit = function () {
         })
         */
 
-        $('#send').removeClass('hidden')
+        $('#action').removeClass('hidden')
 
         $('#send').on('click', function () {
             MessengerExtensions.beginShareFlow(function (response) {
@@ -80,32 +88,4 @@ window.extAstncInit = function () {
                 }, "current_thread")
         })
     }
-
-    function appendLog(e) {
-        console.log(e)
-        $('#log').append('<li>' + JSON.stringify(e) + '</li>')
-    }
-
-    /*
-    $(function () {
-        $('#title').text('not clicked')
-        MessengerExtensions.getContext('1668896723154558', function (result) {
-            appendLog(result)
-        }, function (result) {
-            appendLog(result)
-        })
-    })
-    
-    $('#getStarted').on('click', function () {
-        MessengerExtensions.askPermission(function (response) {
-            var permissions = response.permissions
-            var isGranted = response.isGranted
-            if (isGranted) {
-                appendLog('permission granted')
-            }
-        }, function (errorCode, errorMessage) {
-            appendLog(errorMessage)
-        })
-    })
-    */
 }
