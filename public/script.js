@@ -4,7 +4,7 @@ var firstName
 var accessToken = 'EAAXt2kxZAtn4BAJNMj8BC6FmZBlJvHY1SaQ1k6zZAX0R547OfhZCHbtFkBJoWesiyTC1nowC8FcZCbWob3CQTUaXF3I9oETlFbDEPKPLDsFAaMLIJxim69ZCZCZBzE1AUCwuEvE0VsIw6RLSM8qM9HZBmQXYcikZBlHdGW66Lyye5LpQZDZD'
 
 $('#log').removeClass('hidden')
-appendLog(window.name)
+appendLog(window.viewerId)
 
 function appendLog(e) {
     console.log(e)
