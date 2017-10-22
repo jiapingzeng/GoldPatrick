@@ -11,7 +11,7 @@ function appendLog(e) {
 }
 
 window.attachApp = (viewerId, listId, socketAddress, threadType) => {
-    console.log(viewerId)
+    appendLog(viewerId)
 }
 
 window.extAsyncInit = function () {
