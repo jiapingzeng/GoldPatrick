@@ -10,6 +10,10 @@ function appendLog(e) {
     $('#log').append('<li>' + JSON.stringify(e) + '</li>')
 }
 
+window.attachApp = (viewerId, listId, socketAddress, threadType) => {
+    console.log(viewerId)
+}
+
 window.extAsyncInit = function () {
     appendLog(window.name)
     MessengerExtensions.getUserID(function (uids) {
