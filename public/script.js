@@ -69,7 +69,7 @@ window.extAsyncInit = function () {
                         elements: [{
                             title: (firstName ? firstName : "Patrick") + " just gave you a gold star!",
                             image_url: "https://i.imgur.com/KKNmpp0.png",
-                            subtitle: "Nice!",
+                            subtitle: "Nice job! Glad to hear the great news!",
                             default_action: {
                                 type: "web_url",
                                 url: "https://goldpatrick.herokuapp.com"
